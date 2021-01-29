@@ -1,6 +1,5 @@
 /**
  * The MIT License
- * Copyright (c) 2019- Nordic Institute for Interoperability Solutions (NIIS)
  * Copyright (c) 2018 Estonian Information System Authority (RIA),
  * Nordic Institute for Interoperability Solutions (NIIS), Population Register Centre (VRK)
  * Copyright (c) 2015-2017 Estonian Information System Authority (RIA), Population Register Centre (VRK)
@@ -23,27 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ee.ria.xroad.common.conf.serverconf.model;
+package ee.ria.xroad.common.certificateprofile.impl;
 
-import lombok.Getter;
-import lombok.Setter;
+import ee.ria.xroad.common.certificateprofile.AuthCertificateProfileInfo;
+import ee.ria.xroad.common.certificateprofile.CertificateProfileInfoProvider;
+import ee.ria.xroad.common.certificateprofile.SignCertificateProfileInfo;
 
 /**
- * Time stamping provider.
+ * Default implementation of CertificateProfileInfoProvider.
  */
-@Getter
-@Setter
-public class TspType {
+public class ColCertificateProfileInfoProvider
+        implements CertificateProfileInfoProvider {
 
-    private Long id;
+    @Override
+    public AuthCertificateProfileInfo getAuthCertProfile(
+            AuthCertificateProfileInfo.Parameters params) {
+        return new ColAuthCertificateProfileInfo(params);
+    }
 
-    private String name;
+    @Override
+    public SignCertificateProfileInfo getSignCertProfile(
+            SignCertificateProfileInfo.Parameters params) {
+        return new ColSignCertificateProfileInfo(params);
+    }
 
-    private String url;
-
-    private String username;
-
-    private String password;
-
-    private String oidPolicy;
 }

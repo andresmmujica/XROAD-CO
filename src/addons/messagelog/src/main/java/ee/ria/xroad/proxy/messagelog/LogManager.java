@@ -254,6 +254,7 @@ public class LogManager extends AbstractLogManager {
             log.error("Timestamping failed", e);
 
             for (String tspUrl : ServerConf.getTspUrl()) {
+                ServerConf.getRealUrl(tspUrl);
                 statusMap.put(tspUrl, new DiagnosticsStatus(DiagnosticsUtils.getErrorCode(e), LocalTime.now(), tspUrl));
             }
 

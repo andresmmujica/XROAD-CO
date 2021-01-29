@@ -297,6 +297,9 @@ public final class TestUtils {
         TimestampingService timestampingService = new TimestampingService();
         timestampingService.setUrl(url);
         timestampingService.setName(name);
+        timestampingService.setUsername("");
+        timestampingService.setPassword("");
+        timestampingService.setOidPolicy("");
         return timestampingService;
     }
 

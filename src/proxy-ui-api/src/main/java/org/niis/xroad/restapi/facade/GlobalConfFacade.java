@@ -193,6 +193,27 @@ public class GlobalConfFacade {
     }
 
     /**
+     * {@link GlobalConf#getApprovedTspUsername(String, String)}}
+     */
+    public String getApprovedTspUsername(String instanceIdentifier, String url) {
+        return GlobalConf.getApprovedTspUsername(instanceIdentifier, url);
+    }
+
+    /**
+     * {@link GlobalConf#getApprovedTspPassword(String, String)}}
+     */
+    public String getApprovedTspPassword(String instanceIdentifier, String url) {
+        return GlobalConf.getApprovedTspPassword(instanceIdentifier, url);
+    }
+
+    /**
+     * {@link GlobalConf#getApprovedTspOidPolicy(String, String)}}
+     */
+    public String getApprovedTspOidPolicy(String instanceIdentifier, String url) {
+        return GlobalConf.getApprovedTspOidPolicy(instanceIdentifier, url);
+    }
+
+    /**
      * {@link GlobalConf#isSecurityServerClient(ClientId, SecurityServerId)}}
      */
     public boolean isSecurityServerClient(ClientId client,

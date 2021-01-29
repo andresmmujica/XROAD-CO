@@ -277,6 +277,30 @@ public interface GlobalConfProvider extends ConfProvider {
     String getApprovedTspName(String instanceIdentifier, String approvedTspUrl);
 
     /**
+     * @param instanceIdentifier the instance identifier
+     * @param approvedTspUrl the TSP url
+     * @return approved TSP username for the given instance identifier and TSP
+     * url
+     */
+    String getApprovedTspUsername(String instanceIdentifier, String approvedTspUrl);
+
+    /**
+     * @param instanceIdentifier the instance identifier
+     * @param approvedTspUrl the TSP url
+     * @return approved TSP password for the given instance identifier and TSP
+     * url
+     */
+    String getApprovedTspPassword(String instanceIdentifier, String approvedTspUrl);
+
+    /**
+     * @param instanceIdentifier the instance identifier
+     * @param approvedTspUrl the TSP url
+     * @return approved TSP OID Policy for the given instance identifier and TSP
+     * url
+     */
+    String getApprovedTspOidPolicy(String instanceIdentifier, String approvedTspUrl);
+
+    /**
      * @return the list of TSP certificates
      * @throws Exception if an error occurs
      */

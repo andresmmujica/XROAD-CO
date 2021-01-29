@@ -339,7 +339,7 @@ public class ServerConfTest {
         List<String> tspUrls = ServerConf.getTspUrl();
         assertEquals(NUM_TSPS, tspUrls.size());
         for (int i = 0; i < NUM_TSPS; i++) {
-            assertEquals(String.format("tspUrl%d", i), tspUrls.get(i));
+            assertEquals(String.format("tspUrl%d", i), ServerConf.getRealUrl(tspUrls.get(i)));
         }
     }
 

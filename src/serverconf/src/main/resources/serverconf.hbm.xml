@@ -182,6 +182,9 @@
 
         <property name="name" access="field"/>
         <property name="url" access="field" not-null="true"/>
+        <property name="username" access="field"/>
+        <property name="password" access="field"/>
+        <property name="oidPolicy" access="field"/>
     </class>
 
     <class name="UiUserType" table="UIUSER">

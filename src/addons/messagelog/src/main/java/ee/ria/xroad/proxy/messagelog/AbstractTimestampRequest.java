@@ -27,12 +27,14 @@ package ee.ria.xroad.proxy.messagelog;
 
 import ee.ria.xroad.common.CodedException;
 import ee.ria.xroad.common.conf.globalconf.GlobalConf;
+import ee.ria.xroad.common.conf.serverconf.ServerConf;
 import ee.ria.xroad.common.messagelog.MessageLogProperties;
 import ee.ria.xroad.common.signature.TimestampVerifier;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.tsp.TimeStampRequest;
 import org.bouncycastle.tsp.TimeStampRequestGenerator;
@@ -54,6 +56,8 @@ import static ee.ria.xroad.proxy.messagelog.TimestamperUtil.getTimestampResponse
 abstract class AbstractTimestampRequest {
 
     protected final Long[] logRecords;
+
+    private static final int POS_OID_POLICY = 3;
 
     abstract byte[] getRequestData() throws Exception;
 
@@ -81,7 +85,16 @@ abstract class AbstractTimestampRequest {
         log.debug("tspUrls: {}", tspUrls);
         for (String url: tspUrls) {
             try {
-                log.debug("Sending time-stamp request to {}", url);
+                log.debug("Sending time-stamp request to {}", ServerConf.getRealUrl(url));
+
+                String[] tspData = url.split("\\|");
+                String tspOidPolicy = "";
+                if (tspData.length > POS_OID_POLICY)
+                    tspOidPolicy = tspData[POS_OID_POLICY];
+
+                if (StringUtils.isNotBlank(tspOidPolicy)) {
+                    tsRequest = createTimestampRequest(getRequestData(), tspOidPolicy);
+                }
 
                 TsRequest req = new TsRequest(TimestamperUtil.makeTsRequest(tsRequest, url), url);
 
@@ -93,7 +106,7 @@ abstract class AbstractTimestampRequest {
                 return result(tsResponse, url);
 
             } catch (Exception ex) {
-                log.error("Failed to get time stamp from " + url, ex);
+                log.error("Failed to get time stamp from " + ServerConf.getRealUrl(url), ex);
             }
         }
 
@@ -103,6 +116,12 @@ abstract class AbstractTimestampRequest {
     }
 
     private TimeStampRequest createTimestampRequest(byte[] data)
+            throws Exception {
+
+        return createTimestampRequest(data, null);
+    }
+
+    private TimeStampRequest createTimestampRequest(byte[] data, String oidPolicy)
             throws Exception {
         TimeStampRequestGenerator reqgen = new TimeStampRequestGenerator();
 
@@ -114,6 +133,11 @@ abstract class AbstractTimestampRequest {
 
         ASN1ObjectIdentifier algorithm =
                 getAlgorithmIdentifier(tsaHashAlg).getAlgorithm();
+
+        if (StringUtils.isNotBlank(oidPolicy)) {
+            ASN1ObjectIdentifier objectIdentifier = new ASN1ObjectIdentifier(oidPolicy);
+            reqgen.setReqPolicy(objectIdentifier);
+        }
 
         return reqgen.generate(algorithm, digest);
     }

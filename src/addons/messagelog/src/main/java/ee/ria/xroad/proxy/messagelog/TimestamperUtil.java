@@ -28,6 +28,7 @@ package ee.ria.xroad.proxy.messagelog;
 import ee.ria.xroad.common.messagelog.MessageLogProperties;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.asn1.ASN1InputStream;
 import org.bouncycastle.asn1.cmp.PKIFreeText;
 import org.bouncycastle.asn1.cmp.PKIStatus;
@@ -45,8 +46,10 @@ import java.io.OutputStream;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Slf4j
@@ -71,7 +74,13 @@ final class TimestamperUtil {
     static InputStream makeTsRequest(TimeStampRequest req, String tspUrl) throws Exception {
         byte[] request = req.getEncoded();
 
-        URL url = new URL(tspUrl);
+        String[] tspData = tspUrl.split("\\|");
+        String tspRealUrl = tspData[0];
+        String tspUsername = tspData[1];
+        String tspPassword = tspData[2];
+        //String tspOidPolicy = tspData[3];
+
+        URL url = new URL(tspRealUrl);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
         con.setDoOutput(true);
@@ -81,6 +90,11 @@ final class TimestamperUtil {
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-type", "application/timestamp-query");
         con.setRequestProperty("Content-length", String.valueOf(request.length));
+        if (StringUtils.isNotBlank(tspUsername)) {
+            String auth = tspUsername + ":" + tspPassword;
+            String b64 = Base64.getEncoder().encodeToString(auth.getBytes(StandardCharsets.UTF_8));
+            con.setRequestProperty("Authorization", "Basic " + b64);
+        }
 
         OutputStream out = con.getOutputStream();
         out.write(request);

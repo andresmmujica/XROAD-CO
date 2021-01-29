@@ -100,6 +100,10 @@ class SharedParametersGeneratorV2
       approved_tsa_type.url = each.url
       approved_tsa_type.cert = each.cert.to_java_bytes()
 
+      approved_tsa_type.username = each.username
+      approved_tsa_type.password = each.password
+      approved_tsa_type.oidPolicy = each.oid_policy
+
       @marshaller.root.getApprovedTSA().add(approved_tsa_type)
     end
   end

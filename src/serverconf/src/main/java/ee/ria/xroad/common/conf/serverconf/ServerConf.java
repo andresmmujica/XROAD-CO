@@ -265,6 +265,15 @@ public class ServerConf {
     }
 
     /**
+     * @return URL for the Time-stamping url provided
+     */
+    public static String getRealUrl(String tspUrl) {
+        log.trace("getRealUrl()");
+        String[] data = tspUrl.split("\\|");
+        return data[0];
+    }
+
+    /**
      * @return the internal SSL key.
      * @throws Exception if an error occurs
      */

@@ -15,5 +15,21 @@
         <% end %>
       </td>
     </tr>
+    <% if prefix == "tsp" %>
+      <tr>
+        <td><%= t 'common.username' %></td>
+        <td colspan="2"><%= text_field_tag "#{prefix}_username" %></td>
+      </tr>
+      <tr>
+        <td><%= t 'common.password' %></td>
+        <td colspan="2"><%= password_field_tag "#{prefix}_password" %></td>
+      </tr>
+      <tr>
+        <td><%= t 'common.oid_policy' %></td>
+        <td colspan="2"><%= text_field_tag "#{prefix}_oid_policy" %></td>
+      </tr>
+
+    <% end %>
+
   </table>
 <% end %>

@@ -95,6 +95,9 @@ class Baseline < ActiveRecord::Migration
       create_table "approved_tsas", :force => true do |t|
         t.string "name"
         t.string "url"
+        t.string "username"
+        t.string "password"
+        t.string "oid_policy"
         t.binary "cert"
         t.datetime "valid_from"
         t.datetime "valid_to"
