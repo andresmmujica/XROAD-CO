@@ -41,7 +41,6 @@ import ee.ria.xroad.common.conf.serverconf.model.EndpointType;
 import ee.ria.xroad.common.conf.serverconf.model.ServerConfType;
 import ee.ria.xroad.common.conf.serverconf.model.ServiceDescriptionType;
 import ee.ria.xroad.common.conf.serverconf.model.ServiceType;
-import ee.ria.xroad.common.conf.serverconf.model.TspType;
 import ee.ria.xroad.common.db.TransactionCallback;
 import ee.ria.xroad.common.identifier.ClientId;
 import ee.ria.xroad.common.identifier.GlobalGroupId;
@@ -270,7 +269,15 @@ public class ServerConfImpl implements ServerConfProvider {
     @Override
     public List<String> getTspUrl() {
         return tx(session -> getConf(session).getTsp().stream()
-                .map(TspType::getUrl)
+                .map(tspType -> {
+                    if (StringUtils.isNotBlank(tspType.getUrl()))
+                        return tspType.getUrl()
+                          + "|" + (StringUtils.isNotBlank(tspType.getUsername()) ? tspType.getUsername() : "")
+                          + "|" + (StringUtils.isNotBlank(tspType.getPassword()) ? tspType.getPassword() : "")
+                          + "|" + (StringUtils.isNotBlank(tspType.getOidPolicy()) ? tspType.getOidPolicy() : "");
+                    else
+                        return tspType.getUrl();
+                })
                 .filter(StringUtils::isNotBlank)
                 .collect(Collectors.toList()));
     }

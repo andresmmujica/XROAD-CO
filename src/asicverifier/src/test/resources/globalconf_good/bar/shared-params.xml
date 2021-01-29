@@ -99,6 +99,9 @@
             dGR53ya0NnSf7dlua5FLBRiOFA5kRWTft6RcEW0jGZzscL6wZn+hH99IihjqgdxV
             1GydL+BgDMfryZzhl+h1WtTwv0Bi5Gs81v8UlNUTnCCfLu9fatHx85/ttFcXEyt9
             SQze3NGcaR1i3kyZvNijzG3C+jrUnJ/lFs5AcIiPG0Emz6oZEYs=</cert>
+        <username></username>
+        <password></password>
+        <oidPolicy></oidPolicy>
     </approvedTSA>
 
     <member id="producerId">

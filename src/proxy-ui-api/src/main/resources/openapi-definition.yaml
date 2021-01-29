@@ -5850,6 +5850,9 @@ components:
       required:
         - name
         - url
+        - username
+        - password
+        - oid_policy
       properties:
         name:
           type: string
@@ -5864,6 +5867,27 @@ components:
           description: url of the time stamping service
           example: http://dev.xroad.rocks:123
           minLength: 1
+          maxLength: 255
+        username:
+          type: string
+          format: text
+          description: username of the time stamping service
+          example: tspuser
+          minLength: 0
+          maxLength: 255
+        password:
+          type: string
+          format: text
+          description: password of the time stamping service
+          example: tsppassword
+          minLength: 0
+          maxLength: 255
+        oid_policy:
+          type: string
+          format: text
+          description: OID Policy of the time stamping service
+          example: 1.2.3.4
+          minLength: 0
           maxLength: 255
     TimestampingServiceDiagnostics: # ok
       type: object

@@ -261,6 +261,24 @@ public class EmptyGlobalConf implements GlobalConfProvider {
     }
 
     @Override
+    public String getApprovedTspUsername(String instanceIdentifier,
+            String approvedTspUrl) {
+        return null;
+    }
+
+    @Override
+    public String getApprovedTspPassword(String instanceIdentifier,
+            String approvedTspUrl) {
+        return null;
+    }
+
+    @Override
+    public String getApprovedTspOidPolicy(String instanceIdentifier,
+            String approvedTspUrl) {
+        return null;
+    }
+
+    @Override
     public SecurityServerId getServerId(X509Certificate cert) throws Exception {
         return null;
     }

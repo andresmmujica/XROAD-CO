@@ -196,6 +196,9 @@ public class GlobalConfService {
         TspType tsp = new TspType();
         tsp.setUrl(url);
         tsp.setName(globalConfFacade.getApprovedTspName(globalConfFacade.getInstanceIdentifier(), url));
+        tsp.setUsername(globalConfFacade.getApprovedTspUsername(globalConfFacade.getInstanceIdentifier(), url));
+        tsp.setPassword(globalConfFacade.getApprovedTspPassword(globalConfFacade.getInstanceIdentifier(), url));
+        tsp.setOidPolicy(globalConfFacade.getApprovedTspOidPolicy(globalConfFacade.getInstanceIdentifier(), url));
         return tsp;
     }
 

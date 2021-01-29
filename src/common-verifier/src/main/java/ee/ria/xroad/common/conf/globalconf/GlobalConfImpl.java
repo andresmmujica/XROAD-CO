@@ -540,6 +540,30 @@ public class GlobalConfImpl implements GlobalConfProvider {
     }
 
     @Override
+    public String getApprovedTspUsername(String instanceIdentifier,
+            String approvedTspUrl) {
+        return getSharedParameters(instanceIdentifier).getApprovedTSAs()
+                .stream().filter(t -> t.getUrl().equals(approvedTspUrl))
+                .map(ApprovedTSAType::getUsername).findFirst().orElse(null);
+    }
+
+    @Override
+    public String getApprovedTspPassword(String instanceIdentifier,
+            String approvedTspUrl) {
+        return getSharedParameters(instanceIdentifier).getApprovedTSAs()
+                .stream().filter(t -> t.getUrl().equals(approvedTspUrl))
+                .map(ApprovedTSAType::getPassword).findFirst().orElse(null);
+    }
+
+    @Override
+    public String getApprovedTspOidPolicy(String instanceIdentifier,
+            String approvedTspUrl) {
+        return getSharedParameters(instanceIdentifier).getApprovedTSAs()
+                .stream().filter(t -> t.getUrl().equals(approvedTspUrl))
+                .map(ApprovedTSAType::getOidPolicy).findFirst().orElse(null);
+    }
+
+    @Override
     public List<X509Certificate> getTspCertificates() throws Exception {
         return getSharedParameters().stream()
                 .flatMap(p -> p.getApprovedTSAs().stream())

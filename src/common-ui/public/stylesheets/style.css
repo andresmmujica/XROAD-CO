@@ -780,6 +780,10 @@ p:not(.input) {
 	width: auto !important;
 }
 
+.ui-dialog #tsp_url_and_cert_dialog {
+	height: auto !important;	
+}
+
 .ui-dialog h2 {
 	font-size: 16px;
 	margin-bottom: 10px;

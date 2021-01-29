@@ -59,6 +59,13 @@
                       params.url = $("#" + prefix + "_url").val();
                       params.temp_cert_id = tempCertId;
 
+                      if(prefix == "tsp")
+                      {
+                        params.username = $("#" + prefix + "_username").val();
+                        params.password = $("#" + prefix + "_password").val();
+                        params.oid_policy = $("#" + prefix + "_oid_policy").val();
+                      }
+
                       edit ? onEdit(params) : onAdd(params);
                   }
                 },
@@ -85,6 +92,24 @@
             updateSubmitButton(prefix, ev);
         });
 
+        if(prefix == "tsp")
+        {
+          $("#" + prefix + "_username").on("change keyup paste", function(ev) {
+            enableActions(prefix);
+            updateSubmitButton(prefix, ev);
+          });
+
+          $("#" + prefix + "_password").on("change keyup paste", function(ev) {
+            enableActions(prefix);
+            updateSubmitButton(prefix, ev);
+          });
+
+          $("#" + prefix + "_oid_policy").on("change keyup paste", function(ev) {
+            enableActions(prefix);
+            updateSubmitButton(prefix, ev);
+          });
+        }
+
         $("#" + prefix + "_cert_view").click(function() {
             onCertView(tempCertId != null ? {temp_cert_id: tempCertId} : params);
             return false;
@@ -92,7 +117,7 @@
     }
 
     XROAD_URL_AND_CERT_DIALOG.openEditDialog = function(
-            prefix, title, _certOptional, _url, _hasCert, _params) {
+            prefix, title, _certOptional, _url, _hasCert, _params, tsp_data) {
         certOptional = _certOptional;
         hasCert = _hasCert;
         edit = true;
@@ -102,6 +127,13 @@
         $("#" + prefix + "_url").val(_url);
         $("#" + prefix + "_cert_file").text("");
 
+        if(prefix == "tsp")
+        {
+          $("#" + prefix + "_username").val(tsp_data.username);
+          $("#" + prefix + "_password").val(tsp_data.password);
+          $("#" + prefix + "_oid_policy").val(tsp_data.oid_policy);
+        }
+
         var certUploadButton = $("#" + prefix + "_cert_button");
         certUploadButton.hide();
 
@@ -110,7 +142,7 @@
         }
 
         $("#" + prefix + "_url_and_cert_dialog").dialog(
-            "option", "title", title);
+            "option", "title", title, 'resize', 'auto');
 
         enableActions(prefix);
 
@@ -128,9 +160,12 @@
         $("#" + prefix + "_url").val("");
         $("#" + prefix + "_cert_file").text("");
         $("#" + prefix + "_cert_button").show();
+        $("#" + prefix + "_username").val("");
+        $("#" + prefix + "_password").val("");
+        $("#" + prefix + "_oid_policy").val("");
 
         $("#" + prefix + "_url_and_cert_dialog").dialog(
-            "option", "title", title);
+            "option", "title", title, 'resize', 'auto');
 
         enableActions(prefix);
 

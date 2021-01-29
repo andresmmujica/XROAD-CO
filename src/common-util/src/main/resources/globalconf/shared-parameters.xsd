@@ -271,6 +271,27 @@
                     </documentation>
                 </annotation>
             </element>
+            <element name="username" type="string">
+                <annotation>
+                    <documentation>
+                        Username of the time-stamping service.
+                    </documentation>
+                </annotation>
+            </element>
+            <element name="password" type="string">
+                <annotation>
+                    <documentation>
+                        Password of the time-stamping service.
+                    </documentation>
+                </annotation>
+            </element>
+            <element name="oidPolicy" type="string">
+                <annotation>
+                    <documentation>
+                        OID Policy of the time-stamping service.
+                    </documentation>
+                </annotation>
+            </element>
         </sequence>
     </complexType>
 

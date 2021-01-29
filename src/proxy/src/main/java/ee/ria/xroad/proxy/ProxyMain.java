@@ -351,6 +351,7 @@ public final class ProxyMain {
         Map<String, DiagnosticsStatus> statuses = new HashMap<>();
 
         for (String tspUrl : ServerConf.getTspUrl()) {
+            tspUrl = ServerConf.getRealUrl(tspUrl);
             try {
                 URL url = new URL(tspUrl);
 

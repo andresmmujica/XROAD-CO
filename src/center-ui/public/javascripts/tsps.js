@@ -68,7 +68,7 @@ var XROAD_TSPS = function() {
 
             XROAD_URL_AND_CERT_DIALOG.openEditDialog(
                 "tsp", _("tsps.edit_existing"), false,
-                selected.url, true, params);
+                selected.url, true, params, selected);
         });
 
         $("#tsp_delete").click(function() {

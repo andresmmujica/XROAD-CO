@@ -44,6 +44,9 @@ public class TimestampingServiceConverter {
         TimestampingService timestampingService = new TimestampingService();
         timestampingService.setUrl(tsp.getUrl());
         timestampingService.setName(tsp.getName());
+        timestampingService.setUsername(tsp.getUsername());
+        timestampingService.setPassword(tsp.getPassword());
+        timestampingService.setOidPolicy(tsp.getOidPolicy());
         return timestampingService;
     }
 
@@ -57,6 +60,9 @@ public class TimestampingServiceConverter {
         TspType tspType = new TspType();
         tspType.setUrl(timestampingService.getUrl());
         tspType.setName(timestampingService.getName());
+        tspType.setUsername(timestampingService.getUsername());
+        tspType.setPassword(timestampingService.getPassword());
+        tspType.setOidPolicy(timestampingService.getOidPolicy());
         return tspType;
     }
 }

@@ -89,6 +89,9 @@ class TspsController < ApplicationController
       result << {
         :id => each.id,
         :url => each.url,
+        :username => each.username,
+        :password => each.password,
+        :oid_policy => each.oid_policy,
         :name => each.name,
         :valid_from => format_time(each.valid_from.localtime),
         :valid_to => format_time(each.valid_to.localtime)
@@ -109,12 +112,18 @@ class TspsController < ApplicationController
 
     validate_params({
       :url => [:required],
-      :temp_cert_id => [:required]
+      :temp_cert_id => [:required],
+      :username => [],
+      :password => [],
+      :oid_policy => []
     })
 
     tsp = ApprovedTsa.new
     tsp.url = params[:url]
     tsp.cert = get_temp_cert_from_session(params[:temp_cert_id])
+    tsp.username = params[:username]
+    tsp.password = params[:password]
+    tsp.oid_policy = params[:oid_policy]
 
     logger.info("About to save following TSP: '#{tsp}'")
     tsp.save!
@@ -140,11 +149,17 @@ class TspsController < ApplicationController
     validate_params({
       :tsp_id => [:required],
       :url => [:required],
-      :temp_cert_id => []
+      :temp_cert_id => [],
+      :username => [],
+      :password => [],
+      :oid_policy => []
     })
 
     tsp = ApprovedTsa.find(params[:tsp_id])
     tsp.url = params[:url]
+    tsp.username = params[:username]
+    tsp.password = params[:password]
+    tsp.oid_policy = params[:oid_policy]
 
     audit_log_data[:tsaId] = tsp.id
     audit_log_data[:tsaName] = tsp.name

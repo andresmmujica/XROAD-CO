@@ -141,12 +141,12 @@ public class ImportCertRequestHandler
         boolean signing = CertUtils.isSigningCert(cert);
         boolean authentication = CertUtils.isAuthCert(cert);
 
-        if (signing && authentication) {
-            throw CodedException.tr(X_WRONG_CERT_USAGE,
-                    "wrong_cert_usage.both",
-                    "Both signing and authentication, "
-                            + "only one of them allowed.");
-        }
+//        if (signing && authentication) {
+//            throw CodedException.tr(X_WRONG_CERT_USAGE,
+//                    "wrong_cert_usage.both",
+//                    "Both signing and authentication, "
+//                            + "only one of them allowed.");
+//        }
 
         KeyUsageInfo keyUsage = getKeyUsage(keyInfo, signing);
 

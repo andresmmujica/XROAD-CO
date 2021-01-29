@@ -567,6 +567,51 @@ public final class GlobalConf {
     }
 
     /**
+     * @param instanceIdentifier the instance identifier
+     * @param approvedTspUrl the TSP url
+     * @return approved TSP username for the given instance identifier and TSP
+     * url
+     */
+    public static String getApprovedTspUsername(String instanceIdentifier,
+            String approvedTspUrl) {
+        log.trace("getApprovedTspName({}, {})", instanceIdentifier,
+                approvedTspUrl);
+
+        return getInstance().getApprovedTspUsername(instanceIdentifier,
+                approvedTspUrl);
+    }
+
+    /**
+     * @param instanceIdentifier the instance identifier
+     * @param approvedTspUrl the TSP url
+     * @return approved TSP username for the given instance identifier and TSP
+     * url
+     */
+    public static String getApprovedTspPassword(String instanceIdentifier,
+            String approvedTspUrl) {
+        log.trace("getApprovedTspName({}, {})", instanceIdentifier,
+                approvedTspUrl);
+
+        return getInstance().getApprovedTspPassword(instanceIdentifier,
+                approvedTspUrl);
+    }
+
+    /**
+     * @param instanceIdentifier the instance identifier
+     * @param approvedTspUrl the TSP url
+     * @return approved TSP username for the given instance identifier and TSP
+     * url
+     */
+    public static String getApprovedTspOidPolicy(String instanceIdentifier,
+            String approvedTspUrl) {
+        log.trace("getApprovedTspName({}, {})", instanceIdentifier,
+                approvedTspUrl);
+
+        return getInstance().getApprovedTspOidPolicy(instanceIdentifier,
+                approvedTspUrl);
+    }
+
+    /**
      * @return the list of TSP certificates
      * @throws Exception if an error occurs
      */
