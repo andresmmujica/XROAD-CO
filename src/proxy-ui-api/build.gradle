@@ -137,7 +137,7 @@ processResources.dependsOn 'buildFront'
 buildFront.dependsOn 'checkFrontAudit'
 checkFrontAudit.dependsOn 'checkFrontLicense'
 
-clean.delete << file('frontend/node_modules')
+//clean.delete << file('frontend/node_modules')
 clean.delete << file('frontend/dist')
 
 openApiGenerate {
